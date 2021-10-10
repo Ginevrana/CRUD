@@ -13,7 +13,14 @@ const controller = {
 		res.render('index', {toThousand, offer, visited})
 	},
 	search: (req, res) => {
-		// Do the magic
+		// "keywords" porque es el nombre que recibe el input de search
+		const search = req.query.keywords.trim()
+		if (search !== '') {
+			const result = products.filter(product => product.name.toLowerCase().includes(search.toLowerCase()))
+			res.render('results', {result, toThousand, search})
+		} else {
+			res.redirect('/')
+		}
 	},
 };
 
